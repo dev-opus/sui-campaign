@@ -1,0 +1,13 @@
+{
+  "name": "campaign",
+  "version": "1.0.0",
+  "description": "The **sui campaign** is a DEFI smart contract built on the SUI blockchain using the sui flavour of the Move programming language.",
+  "main": "index.js",
+  "scripts": {
+    "build": "sui move build",
+    "deploy": "sui client publish --gas-budget 1000000000"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
