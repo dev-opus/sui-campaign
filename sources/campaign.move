@@ -51,8 +51,7 @@ module campaign::campaign {
     ended_at: Option<u64>
   }
 
-  struct CampaignDetails has key, store{
-    id: UID,
+  struct CampaignDetails has copy, drop{
     ended: bool,
     started_at: u64,
     amount_donated: u64,
@@ -83,20 +82,15 @@ module campaign::campaign {
 
   /* Functions */
 
-  // create an admin account on initialization (only one of such accounts)
+  // creates an admin account on initialization (only one of such accounts)
+  // creates a vector for storing campaign owner addresses
   fun init (ctx: &mut TxContext) {
     let admin = AdminCap {
       id: object::new(ctx)
     };
 
-    let admin_address = tx_context::sender(ctx);
-    transfer::transfer(admin, admin_address);
-  }
-
-  // create a vector for storing campaign owner addresses
-  // only admins can call this function as it uses the AdminCap
-  public entry fun create_address_vector (_: &AdminCap, ctx: &mut TxContext) {
-    let addresses = vector::empty<address>();
+   let addresses = vector::empty<address>();
+   let admin_address = tx_context::sender(ctx);
 
     let owner_address_vector = OwnerAddressVector {
       id: object::new(ctx),
@@ -104,8 +98,8 @@ module campaign::campaign {
     };
 
     transfer::share_object(owner_address_vector);
-  }
-  
+    transfer::transfer(admin, admin_address);
+  }  
 
   // create a campaign (and the owner object)
   public entry fun create_campaign(
@@ -116,18 +110,7 @@ module campaign::campaign {
     ctx: &mut TxContext
     ) {
     let campaign_owner_address = tx_context::sender(ctx);
-
-    let i = 0;
-    let n = vector::length<address>(&address_vector.addresses);
-
-    // loop through the addresses vector
-    while (i < n) {
-      let current_address = vector::borrow<address>(&address_vector.addresses, i);
-
-      // asserts that the current caller hasn't created a campaign (campaigns are currently limited to one per user)
-      if (current_address == &campaign_owner_address) abort EMaxCampaignsReached;
-      continue
-    };
+    assert!(!vector::contains<address>(&address_vector.addresses, &campaign_owner_address), EMaxCampaignsReached);
 
     let campaign_uid = object::new(ctx);
     let campaign_id = object::uid_to_inner(&campaign_uid);
@@ -231,9 +214,8 @@ module campaign::campaign {
   }
 
   // get campaign details
-  public entry fun get_campaign_details(campaign: &Campaign, ctx: &mut TxContext) {
+  public entry fun get_campaign_details(campaign: &Campaign): CampaignDetails {
     let campaign_details = CampaignDetails {
-      id: object::new(ctx),
       ended: campaign.ended,
       campaign_title: campaign.title,
       campaign_about: campaign.about,
@@ -242,6 +224,6 @@ module campaign::campaign {
       num_of_donations: vector::length<DonationReceipt>(&campaign.donations),
     };
 
-    transfer::transfer(campaign_details, tx_context::sender(ctx));
+    campaign_details
   }
 }
