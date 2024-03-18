@@ -140,7 +140,6 @@ If you have node.js and npm installed, you can run these instead.
 
 ```
 {
-    id: UID,
     ended: bool,
     started_at: u64,
     amount_donated: u64,
@@ -163,15 +162,6 @@ If you have node.js and npm installed, you can run these instead.
 ### init
 
 - **Description**: Initializes the Campaign smart contract by creating an admin account.
-
-### create_address_vector
-
-- **Parameters**:
-
-  - admin_cap: `&AdminCap`
-  - ctx: `&mut TxContext`
-
-- **Description**: creates the `OwnerAddressVector` vector object used for storing the addresses of campaign owners.
 
 ### create_campaign
 
@@ -226,12 +216,9 @@ If you have node.js and npm installed, you can run these instead.
 ### get_campaign_details
 
 - **Parameters**:
-
   - campaign: `&mut Campaign`
-  - clock: `&Clock`
-  - ctx: `&mut TxContext`
 
-- **Description**: retrieves the details of the passed campaign and sends it to the caller's address.
+- **Description**: retrieves the details of the passed campaign and returns it as an object.
 
 ### end_campaign
 
@@ -250,7 +237,8 @@ If you have node.js and npm installed, you can run these instead.
 
 ![visual interaction](./sui-explorer.png)
 
-To interact with a live (visual) version of this smart contract, please visit [this link](https://suiexplorer.com/object/0x5012683dec0157122ffa4aab51f56e3ac9ec751c716122c74546cbac79288b11?network=devnet). The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
+To interact with a live (visual) version of this smart contract, please visit [this link](https://suiexplorer.com/object/0x97c2dfeb5755d55e03f73d2375272132008e0108db51dae040164ce7cbd670a6?network=devnet) version of this smart contract, please visit [this link](). The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
+). The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
 
 ## Security Considerations
 
