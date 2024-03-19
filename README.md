@@ -90,7 +90,7 @@ If you have node.js and npm installed, you can run these instead.
    }
    ```
 
-3. Withdrawl
+3. Withdrawal
 
    ```
    {
@@ -237,8 +237,7 @@ If you have node.js and npm installed, you can run these instead.
 
 ![visual interaction](./sui-explorer.png)
 
-To interact with a live (visual) version of this smart contract, please visit [this link](https://suiexplorer.com/object/0x97c2dfeb5755d55e03f73d2375272132008e0108db51dae040164ce7cbd670a6?network=devnet) version of this smart contract, please visit [this link](). The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
-). The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
+To interact with a live (visual) version of this smart contract, please visit [this link](https://suiexplorer.com/object/0x97c2dfeb5755d55e03f73d2375272132008e0108db51dae040164ce7cbd670a6?network=devnet) version of this smart contract. The link redirects to the `devnet` branch of the **sui explorer** with the published version of the smart contract.
 
 ## Security Considerations
 
