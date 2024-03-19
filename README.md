@@ -161,7 +161,7 @@ If you have node.js and npm installed, you can run these instead.
 
 ### init
 
-- **Description**: Initializes the Campaign smart contract by creating an admin account.
+- **Description**: Initializes the Campaign smart contract by creating an admin account and an address_vector object for storing campaign owners addresses.
 
 ### create_campaign
 
